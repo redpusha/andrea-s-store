@@ -1,0 +1,58 @@
+<h1>Andrea's Store</h1>
+
+<div class="navbar">
+    <div class="nav-links">
+        <a (click) = 'selezionaCategoria("telefoni")' class="links">Telefoni</a>
+        <a (click) = 'selezionaCategoria("televisori")' class="links">Tv</a>
+        <a (click) = 'selezionaCategoria("pc")' class="links">Pc</a>
+    </div>
+
+    <a class="carrello" (click) = "vaiAlCarrello()">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </a>
+
+    <a (click)="gestisciAccesso()" class="login-link" *ngIf="verificaAccesso(); else nonLoggato">
+        <i class="fa-solid fa-user"></i> 
+        <span>{{(user$ | async)?.username}} | LogOut</span>
+    </a>
+    
+    <ng-template #nonLoggato>
+        <a routerLink="/login" class="login-link">
+            <i class="fa-solid fa-user"></i> 
+            <span>LogIn</span>
+        </a>
+    </ng-template>
+</div>
+
+<div class="search-container">
+    <!-- Campo di testo con placeholder -->
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Cerca..." 
+      onkeyup="showSuggestions(this.value)"
+      [(ngModel)] = "testoRicerca"
+    >
+
+    <!-- Lista dei suggerimenti -->
+    <ul class="filtered-products-list">
+        <li *ngFor="let prodotto of prodottiFiltrati" 
+            (click)="fromListToDetails(prodotto)" 
+            class="filtered-product-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>{{prodotto}}</span>
+        </li>
+    </ul>
+</div>
+
+
+<br>
+
+<app-cronologia-output (cronologia) = 'nuovaCronologia = $event'></app-cronologia-output>
+
+<div class="cronologia">
+    <h2>Cronologia Prodotti Visualizzati:</h2>
+    <ul class="cronologia-lista">
+        <li *ngFor="let item of nuovaCronologia">{{item.nomeProdotto}} - {{item.orario}}</li>
+    </ul>
+</div>

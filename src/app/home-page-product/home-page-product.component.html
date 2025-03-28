@@ -1,0 +1,33 @@
+<!-- 
+
+  <div>
+    <h2>{{ titolo }}</h2>
+    <ul>
+        <li *ngFor="let prodotto of listaName" (click)="onProductClick(prodotto)">
+            {{ prodotto }}
+        </li>
+    </ul>
+</div>
+
+-->
+
+<div>
+  <h2>{{ titolo }}</h2>
+  <div class="products">
+    <div *ngFor="let prodotto of listaName" class="card">
+      <div (click)="onProductClick(prodotto)">
+        <img [src]="'https://dummyimage.com/300x200/cccccc/000000'" alt="{{ prodotto }}">
+        <div class="card-content">
+          <h3 class="card-title">{{ prodotto }}</h3>
+        </div>
+      </div>
+      <div class="cart-button-container">
+        <button class="add-to-cart" (click)="aggiungiAlCarrello(prodotto)">
+          <i class="fas fa-shopping-cart"></i>
+          Aggiungi Al Carrello
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

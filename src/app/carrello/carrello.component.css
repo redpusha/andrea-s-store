@@ -1,0 +1,20 @@
+.carrello-vuoto {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.btn-rimuovi {
+    background-color: lightcoral;
+    border-color: red;
+    margin-left: 10px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-rimuovi:hover {
+    background-color: darkred;
+    border-color: darkred;
+}

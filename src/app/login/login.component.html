@@ -1,0 +1,19 @@
+<div class="div-form">
+    <h1>Andrea's Store</h1>
+
+    <form [ngClass]="'form1'" [formGroup]="credenziali" (ngSubmit)="logOnClick()">
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" id="username" formControlName="username">
+        </div>
+        
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="Password" formControlName="password">
+        </div>
+        
+        <button type="submit" [ngClass]="'login-button'">Login</button>
+        
+        <p *ngIf="errorP" class="error-message">Credenziali Errate</p>
+    </form>
+</div>

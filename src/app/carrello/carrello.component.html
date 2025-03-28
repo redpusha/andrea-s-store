@@ -1,0 +1,14 @@
+<div class="carrello-container">
+  <h2>Il tuo carrello</h2>
+  
+  <div *ngIf="listaProdotti.length === 0" class="carrello-vuoto">
+    Il carrello è vuoto
+  </div>
+
+  <ul *ngIf="listaProdotti.length > 0">
+    <li *ngFor="let prodotto of listaProdotti">
+      {{ prodotto }}
+      <button (click)="rimuoviProdotto(prodotto)" class="btn-rimuovi">Elimina</button>
+    </li>
+  </ul>
+</div>
