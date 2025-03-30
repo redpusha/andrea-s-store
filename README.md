@@ -62,7 +62,3 @@ For more information on using the Angular CLI, including detailed command refere
 ## Arguments
 lista delle funzionalità: route, behaviorSubject, ...
 
-
-main2
-due
-uno
