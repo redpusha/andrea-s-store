@@ -12,12 +12,13 @@ import { Observable } from 'rxjs';
 import { Utente } from '../models/utente.model';
 import { inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ServizioCarrelloService } from '../carrello/servizio-carrello.service';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterModule, CronologiaOutputComponent, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
 
@@ -33,6 +34,9 @@ export class HomeComponent implements OnInit{
   // tutti i name dei prodotti
   prodotti: string[] = []; 
 
+  //variabile per la lista del carrello
+  numeroElementiCarrello: number = 0; 
+
   testoRicerca: string = ""; 
 
   titolo: string = ''; 
@@ -44,10 +48,14 @@ export class HomeComponent implements OnInit{
     private servizio: ServizioService, 
     private router: Router, 
     private route: ActivatedRoute,
+    private carrello: ServizioCarrelloService
   ) {}
 
   serviceLogin = inject(ServiceLoginService); 
   user$ = this.serviceLogin.user$;
+
+  // uso il definite assignment assertion per evitare l'errore di compilazione (!:)
+  listaProdottiAggiunti$!: Observable<string[]>;
 
   ngOnInit(): void {
     this.listaTelefoni = this.servizio.getListaTelefoni();
@@ -67,6 +75,14 @@ export class HomeComponent implements OnInit{
     this.listaPc.forEach(pc => {
       this.prodotti.push(pc.name); 
     });
+
+    //this.numeroElementiCarrello = this.carrello.listaProdottiAggiunti.length; 
+    this.listaProdottiAggiunti$ = this.carrello.listaProdottiAggiunti$;
+
+    this.carrello.listaProdottiAggiunti$.subscribe(lista => {
+      this.numeroElementiCarrello = lista.length;
+    });
+    
   }; 
 
   /*

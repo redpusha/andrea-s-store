@@ -6,10 +6,13 @@
         <a (click) = 'selezionaCategoria("televisori")' class="links">Tv</a>
         <a (click) = 'selezionaCategoria("pc")' class="links">Pc</a>
     </div>
-
-    <a class="carrello" (click) = "vaiAlCarrello()">
-        <i class="fa-solid fa-cart-shopping"></i>
-    </a>
+    
+    <div class="carrello">
+        <a (click) = "vaiAlCarrello()">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>    
+        <p class="numero-elementi">{{ (listaProdottiAggiunti$ | async)?.length }}</p>
+    </div>
 
     <a (click)="gestisciAccesso()" class="login-link" *ngIf="verificaAccesso(); else nonLoggato">
         <i class="fa-solid fa-user"></i> 

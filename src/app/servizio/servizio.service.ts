@@ -12,6 +12,16 @@ export class ServizioService {
   private cronologia: Cronologia[] = [];
   private categoria: string = ''; 
 
+  // creo un Map (chiave-valore) per i prodotti e la loro relativa immagine 
+  private immaginiProdotti: { [key: string]: string } = {
+    "iphone 16": "assets/images/iphone16.jpg",
+    "samsung s24": "assets/images/samsungs24.webp",
+    "lg": "assets/images/lg.webp",
+    "philips": "assets/images/philips.jpg",
+    "hp": "assets/images/hp.jpg",
+    "mac": "assets/images/mac.webp"
+  } 
+
   constructor() {}
 
   getListaTelefoni (): Telefono[] {
@@ -74,5 +84,9 @@ export class ServizioService {
     }); 
 
     return this.categoria; 
+  };
+
+  getImmagineProdotto (name: string) {
+    return this.immaginiProdotti[name] || "error 404: file not foundk";
   }
 }

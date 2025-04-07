@@ -70,5 +70,9 @@ export class HomePageProductComponent implements OnInit {
 
   aggiungiAlCarrello(name: string) {
     this.carrello.aggiungiProdotto(name);
+  };
+
+  getImmagine(prodotto: string): string {
+    return this.servizio.getImmagineProdotto(prodotto); 
   }
 }

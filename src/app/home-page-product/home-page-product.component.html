@@ -16,7 +16,7 @@
   <div class="products">
     <div *ngFor="let prodotto of listaName" class="card">
       <div (click)="onProductClick(prodotto)">
-        <img [src]="'https://dummyimage.com/300x200/cccccc/000000'" alt="{{ prodotto }}">
+        <img class="img-prodotto" [src]="getImmagine(prodotto)" alt="{{ prodotto }}">
         <div class="card-content">
           <h3 class="card-title">{{ prodotto }}</h3>
         </div>
