@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Telefono } from '../models/telefono.model';
 import { ServizioService } from '../servizio/servizio.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ServizioCarrelloService } from '../carrello/servizio-carrello.service';
 
 @Component({
   selector: 'app-telefoni',
@@ -20,8 +22,15 @@ export class TelefoniComponent implements OnInit{
     fotocamera: '',
     categoria: 'telefoni'
   }; 
+
+  listaProdottiAggiunti$!: Observable<string[]>; 
   
-  constructor (private route: ActivatedRoute, private servizio: ServizioService, private router: Router) {}
+  constructor (
+    private route: ActivatedRoute, 
+    private servizio: ServizioService, 
+    private router: Router,
+    private carrello: ServizioCarrelloService
+  ) {}
 
   ngOnInit(): void {
     this.name = this.route.snapshot.paramMap.get('name'); 
@@ -30,7 +39,9 @@ export class TelefoniComponent implements OnInit{
       if (item.name === this.name) {
         this.telefono = item; 
       };
-    })
+    });
+
+    this.listaProdottiAggiunti$ = this.carrello.listaProdottiAggiunti$; 
   };
 
   backTo () {

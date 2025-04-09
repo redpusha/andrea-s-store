@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServizioService } from '../servizio/servizio.service';
 import { CommonModule } from '@angular/common';
 import { ServizioCarrelloService } from '../carrello/servizio-carrello.service';
+import { Observable } from 'rxjs';
+import { count } from 'console';
 
 @Component({
   selector: 'app-home-page-product',
@@ -19,22 +21,44 @@ export class HomePageProductComponent implements OnInit {
   listaName: string[] = [];
 
   @Input() prodotti: string[] = [];
-  @Input() titolo: string = '';  
+  @Input() titolo: string = '';
 
   @Output() prodottoSelezionato = new EventEmitter<any>();
 
+  listaProdottiAggiunti!: string[];
+
+  listaMap: { name: string, count: number }[] = [];
+
   constructor(
-    private route: ActivatedRoute, 
-    private router: Router, 
+    private route: ActivatedRoute,
+    private router: Router,
     private servizio: ServizioService,
-    private carrello: ServizioCarrelloService
+    private carrello: ServizioCarrelloService,
   ) { }
 
   ngOnInit(): void {
     // legge i parametri della rotta
     this.categoria = this.route.snapshot.paramMap.get('categoria') || '';
     // this.name = this.route.snapshot.paramMap.get('name') || 'list';
-    this.loadProductList(); 
+    this.loadProductList();
+
+    this.carrello.listaProdottiAggiunti$.subscribe(lista => {
+      this.listaProdottiAggiunti = lista;
+      this.aggiornaListaMap(); // funzione che aggiorna i count da lista
+    });
+
+    /*
+    // #TODO -> migliora il codice con i for-of 
+    this.listaName.forEach(name => {
+      var count: number = 0;
+      for (let i = 0; i < this.listaProdottiAggiunti.length; i++) {
+        if (name == this.listaProdottiAggiunti[i]) {
+          count++;
+        }
+      }
+      this.listaMap.push({ name, count });
+    })
+    */
   };
 
   selezionaProdotto(prodotto: any): void {
@@ -64,15 +88,37 @@ export class HomePageProductComponent implements OnInit {
 
   onProductClick(prodotto: string): void {
     // this.prodottoSelezionato.emit(prodotto);
-    this.servizio.aggiungiAllaCronologia(prodotto); 
+    this.servizio.aggiungiAllaCronologia(prodotto);
     this.router.navigate(['/prodotti', this.categoria, prodotto]);
   };
 
-  aggiungiAlCarrello(name: string) {
-    this.carrello.aggiungiProdotto(name);
+  aggiungiAlCarrello(prodotto: string) {
+    this.carrello.aggiungiProdotto(prodotto); 
   };
 
   getImmagine(prodotto: string): string {
-    return this.servizio.getImmagineProdotto(prodotto); 
+    return this.servizio.getImmagineProdotto(prodotto);
+  }
+
+  getCountFromProduct(product: string): number {
+    var exist: boolean = false;
+    let count: number = 0;
+    this.listaMap.forEach(map => {
+      if (product == map.name) {
+        exist = true;
+        count = map.count;
+      }
+    })
+    return exist ? count : 0;
+  };
+
+  aggiornaListaMap(): void {
+    this.listaMap = [];
+    for (const name of this.listaName) {
+      const count = this.listaProdottiAggiunti.filter(p => p === name).length;
+      if (count > 0) {
+        this.listaMap.push({ name, count });
+      }
+    }
   }
 }

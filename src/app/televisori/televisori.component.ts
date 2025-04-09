@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Televisori } from '../models/televisori.model';
 import { ServizioService } from '../servizio/servizio.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ServizioCarrelloService } from '../carrello/servizio-carrello.service';
+
 
 @Component({
   selector: 'app-televisori',
@@ -19,9 +22,16 @@ export class TelevisoriComponent implements OnInit{
     prezzo: 0,
     display: '',
     categoria: "televisori"
-  }
+  };
 
-  constructor (private route: ActivatedRoute, private servizio: ServizioService, private router: Router) {}
+  listaProdottiAggiunti$!: Observable<string[]>; 
+
+  constructor (
+    private route: ActivatedRoute, 
+    private servizio: ServizioService, 
+    private router: Router,
+    private carrello: ServizioCarrelloService
+  ) {}
 
   ngOnInit(): void {
     this.name = this.route.snapshot.paramMap.get("name");
@@ -30,7 +40,10 @@ export class TelevisoriComponent implements OnInit{
       if (item.name === this.name) {
         this.televisore = item;
       }
-    })
+    });
+
+    this.listaProdottiAggiunti$ = this.carrello.listaProdottiAggiunti$; 
+
   };
 
   backTo () {

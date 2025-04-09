@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ServizioService } from '../servizio/servizio.service';
 import { Pc } from '../models/pc.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ServizioCarrelloService } from '../carrello/servizio-carrello.service';
 
 @Component({
   selector: 'app-pc',
@@ -21,7 +23,14 @@ export class PcComponent implements OnInit{
     categoria: "pc"
   }; 
 
-  constructor (private route: ActivatedRoute, private router: Router, private servizio: ServizioService) {}
+  listaProdottiAggiunti$!: Observable<string[]>; 
+
+  constructor (
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private servizio: ServizioService,
+    private carrello: ServizioCarrelloService
+  ) {}
 
   ngOnInit(): void {
     this.name = this.route.snapshot.paramMap.get("name");
@@ -30,7 +39,10 @@ export class PcComponent implements OnInit{
       if (item.name === this.name) {
         this.pc = item; 
       }
-    })
+    });
+
+    this.listaProdottiAggiunti$ = this.carrello.listaProdottiAggiunti$; 
+
   };
 
   backTo () {

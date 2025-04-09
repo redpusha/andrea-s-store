@@ -22,10 +22,15 @@
         </div>
       </div>
       <div class="cart-button-container">
-        <button class="add-to-cart" (click)="aggiungiAlCarrello(prodotto)">
-          <i class="fas fa-shopping-cart"></i>
-          Aggiungi Al Carrello
-        </button>
+        <div class="button-with-badge">
+          <button class="add-to-cart" (click)="aggiungiAlCarrello(prodotto)">
+            <i class="fas fa-shopping-cart"></i>
+            Aggiungi Al Carrello
+          </button>
+          <span *ngIf = "getCountFromProduct(prodotto) > 0" class="badge">
+            {{ getCountFromProduct(prodotto) }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
