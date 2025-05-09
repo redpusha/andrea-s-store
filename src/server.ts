@@ -64,3 +64,23 @@ if (isMainModule(import.meta.url)) {
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
 export const reqHandler = createNodeRequestHandler(app);
+
+export const getPrerenderParams = () => {
+  const prodotti = {
+    telefoni: ['iphone-15', 'galaxy-s23'],
+    televisori: ['lg-oled', 'samsung-qled'],
+    pc: ['macbook-pro', 'dell-xps'],
+  } as const;
+
+  const routes: { route: string }[] = [];
+
+  for (const categoria of Object.keys(prodotti) as (keyof typeof prodotti)[]) {
+    routes.push({ route: `/prodotti/${categoria}` });
+
+    for (const nome of prodotti[categoria]) {
+      routes.push({ route: `/prodotti/${categoria}/${nome}` });
+    }
+  }
+
+  return routes;
+};
