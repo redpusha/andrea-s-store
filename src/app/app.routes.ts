@@ -9,6 +9,27 @@ import { CarrelloComponent } from './carrello/carrello.component';
 import { RegistrazioneComponent } from './registrazione/registrazione.component';
 import { RenderMode } from '@angular/ssr';
 
+export function getPrerenderParams() {
+    const prodotti = {
+      telefoni: ['iphone-15', 'galaxy-s23'],
+      televisori: ['lg-oled', 'samsung-qled'],
+      pc: ['macbook-pro', 'dell-xps'],
+    } as const;
+  
+    const routes: { route: string }[] = [];
+  
+    for (const categoria of Object.keys(prodotti) as (keyof typeof prodotti)[]) {
+      routes.push({ route: `/prodotti/${categoria}` });
+  
+      for (const nome of prodotti[categoria]) {
+        routes.push({ route: `/prodotti/${categoria}/${nome}` });
+      }
+    }
+  
+    return routes;
+};
+
+
 export const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
@@ -21,3 +42,4 @@ export const routes: Routes = [
     {path: 'prodotti/pc/:name', component: PcComponent},
     {path: 'carrello', component: CarrelloComponent}
 ];
+
