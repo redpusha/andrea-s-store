@@ -1,0 +1,34 @@
+<h1>Registrazione</h1>
+
+<br>
+
+<div class="div-form">
+    <form action="" [formGroup]="credenzialiRegistrazione">
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="nome" id="nome" formControlName="nome">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="cognome" id="cognome" formControlName="cognome">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="email" placeholder="email" id="email" formControlName="email">
+        </div>
+        
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="Password" formControlName="password">
+        </div>
+
+        <br>
+
+        <button (click)="signUp()" type="submit">Registrati</button>
+
+        <p *ngIf="error" class="error-msg">inserire tutti i dati</p>
+    </form>
+
+</div>

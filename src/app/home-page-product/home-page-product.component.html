@@ -27,6 +27,9 @@
             <i class="fas fa-shopping-cart"></i>
             Aggiungi Al Carrello
           </button>
+          <button *ngIf = "getCountFromProduct(prodotto) > 0" class="btn-rimuovi-elemento" (click) = "callRimuoviElemento(prodotto)">
+            <i class="fa-solid fa-minus"></i>
+          </button>
           <span *ngIf = "getCountFromProduct(prodotto) > 0" class="badge">
             {{ getCountFromProduct(prodotto) }}
           </span>

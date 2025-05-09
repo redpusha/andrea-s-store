@@ -15,7 +15,7 @@ body {
 }
 
 .card {
-    width: 300px;
+    width: 350px;
     background-color: #ccffc4;
     border-radius: 8px;
     overflow: hidden;
@@ -94,4 +94,13 @@ body {
     font-size: 0.75rem;
     font-weight: bold;
     line-height: 1;
+}
+
+.btn-rimuovi-elemento {
+    border: white;
+    background-color: crimson;
+    border-radius: 50%;
+    color: white;
+    margin-left: 3vw;
+    font-size: x-large;
 }

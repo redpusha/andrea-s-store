@@ -120,5 +120,9 @@ export class HomePageProductComponent implements OnInit {
         this.listaMap.push({ name, count });
       }
     }
+  };
+
+  callRimuoviElemento(name: string) {
+    this.carrello.rimuoviProdotto(name); 
   }
 }

@@ -1,7 +1,7 @@
 <div class="div-form">
     <h1>Andrea's Store</h1>
 
-    <form [ngClass]="'form1'" [formGroup]="credenziali" (ngSubmit)="logOnClick()">
+    <form [ngClass]="'form1'" [formGroup]="credenziali">
         <div class="input-group">
             <i class="fas fa-user"></i>
             <input type="text" placeholder="Username" id="username" formControlName="username">
@@ -12,8 +12,10 @@
             <input type="password" id="password" placeholder="Password" formControlName="password">
         </div>
         
-        <button type="submit" [ngClass]="'login-button'">Login</button>
+        <button type="submit" [ngClass]="'login-button'" (click)="logOnClick()">Login</button>
+        <button type="submit" [ngClass]="'signup-button'" (click)="signup()">Registrati</button>
         
         <p *ngIf="errorP" class="error-message">Credenziali Errate</p>
     </form>
+
 </div>

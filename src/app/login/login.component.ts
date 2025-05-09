@@ -28,4 +28,8 @@ export class LoginComponent {
       this.errorP = true; 
     }
   }
+
+  signup() {
+    this.router.navigate(['registrazione']); 
+  }
 }

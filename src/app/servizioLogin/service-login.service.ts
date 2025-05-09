@@ -3,6 +3,7 @@ import { CanActivate } from '@angular/router';
 import { Utente } from '../models/utente.model';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { TypeofExpression } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class ServiceLoginService {
   user$: Observable<Utente | null> = this.userSubject.asObservable();  
   private user: Utente = {username: "", password: ""}; 
   private signedUpUsers: Utente[] = [{username: "andrea28", password: "12345"}]; 
+  private signUpUser: Utente = {username: "", password: ""}; 
 
   logIn (username: string, password: string): boolean {
     this.signedUpUsers.forEach(utente => {
@@ -38,5 +40,10 @@ export class ServiceLoginService {
 
   logStatus (): boolean {
     return this.isLoggedIn; 
+  }
+
+  registrazione(username: string, password: string) {
+    this.signedUpUsers.push({username: username, password: password}); 
+    return true; 
   }
 }

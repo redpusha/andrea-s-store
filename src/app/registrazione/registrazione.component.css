@@ -1,0 +1,19 @@
+.div-form{
+    text-align: center;
+    align-items: center;
+}
+
+input {
+    border-color: white;
+    margin-top: 2vh;
+}
+
+i {
+    margin-right: 10px;
+}
+
+.error-msg {
+    text-align: center;
+    margin-top: 30px;
+    color: red;
+}
