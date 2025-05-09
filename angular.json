@@ -92,6 +92,27 @@
             ],
             "scripts": []
           }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "esercizio-prodotti:build:production",
+            "serverTarget": "esercizio-prodotti:server:production",
+            "routes": [
+              "/",
+              "/home",
+              "/prodotti/telefoni",
+              "/prodotti/telefoni/iphone-15",
+              "/prodotti/telefoni/galaxy-s23",
+              "/prodotti/televisori",
+              "/prodotti/televisori/lg-oled",
+              "/prodotti/televisori/samsung-qled",
+              "/prodotti/pc",
+              "/prodotti/pc/macbook-pro",
+              "/prodotti/pc/dell-xps",
+              "/carrello"
+            ]
+          }
         }
       }
     }
