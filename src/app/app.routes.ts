@@ -36,10 +36,25 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent}, 
     {path: 'registrazione', component: RegistrazioneComponent},
     // Unica route per tutti i prodotti
-    {path: 'prodotti/:categoria', component: HomePageProductComponent},
-    {path: 'prodotti/telefoni/:name', component: TelefoniComponent},
-    {path: 'prodotti/televisori/:name', component: TelevisoriComponent},
-    {path: 'prodotti/pc/:name', component: PcComponent},
-    {path: 'carrello', component: CarrelloComponent}
+    {path: 'prodotti/:categoria', 
+        component: HomePageProductComponent, 
+        providers: [{ provide: RenderMode, useValue: 'prerender' }]
+    },
+    {path: 'prodotti/telefoni/:name',
+        component: TelefoniComponent,
+        providers: [{ provide: RenderMode, useValue: 'prerender' }]
+    },
+    {path: 'prodotti/televisori/:name', 
+        component: TelevisoriComponent,
+        providers: [{ provide: RenderMode, useValue: 'prerender' }]
+    },
+    {path: 'prodotti/pc/:name', 
+        component: PcComponent,
+        providers: [{ provide: RenderMode, useValue: 'prerender' }]
+    },
+    {path: 'carrello', 
+        component: CarrelloComponent,
+        providers: [{ provide: RenderMode, useValue: 'prerender' }]
+    }
 ];
 
