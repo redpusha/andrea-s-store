@@ -15,9 +15,9 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent}, 
     {path: 'registrazione', component: RegistrazioneComponent},
     // Unica route per tutti i prodotti
-    {path: 'prodotti/:categoria', component: HomePageProductComponent, data: { renderMode: 'server' }},
-    {path: 'prodotti/telefoni/:name', component: TelefoniComponent, data: { renderMode: 'server' }},
-    {path: 'prodotti/televisori/:name', component: TelevisoriComponent, data: { renderMode: 'server' }},
-    {path: 'prodotti/pc/:name', component: PcComponent, data: { renderMode: 'server' }},
+    {path: 'prodotti/:categoria', component: HomePageProductComponent},
+    {path: 'prodotti/telefoni/:name', component: TelefoniComponent},
+    {path: 'prodotti/televisori/:name', component: TelevisoriComponent},
+    {path: 'prodotti/pc/:name', component: PcComponent},
     {path: 'carrello', component: CarrelloComponent}
 ];
