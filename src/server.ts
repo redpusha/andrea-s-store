@@ -67,9 +67,9 @@ export const reqHandler = createNodeRequestHandler(app);
 
 export const getPrerenderParams = () => {
   const prodotti = {
-    telefoni: ['iphone-15', 'galaxy-s23'],
-    televisori: ['lg-oled', 'samsung-qled'],
-    pc: ['macbook-pro', 'dell-xps'],
+    telefoni: ['iphone 16', 'galaxy s24'],
+    televisori: ['lg', 'philips'],
+    pc: ['hp', 'mac'],
   } as const;
 
   const routes: { route: string }[] = [];
