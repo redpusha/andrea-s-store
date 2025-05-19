@@ -47,18 +47,7 @@ export class HomePageProductComponent implements OnInit {
       this.aggiornaListaMap(); // funzione che aggiorna i count da lista
     });
 
-    /*
-    // #TODO -> migliora il codice con i for-of 
-    this.listaName.forEach(name => {
-      var count: number = 0;
-      for (let i = 0; i < this.listaProdottiAggiunti.length; i++) {
-        if (name == this.listaProdottiAggiunti[i]) {
-          count++;
-        }
-      }
-      this.listaMap.push({ name, count });
-    })
-    */
+
   };
 
   selezionaProdotto(prodotto: any): void {

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CarrelloComponent } from './carrello.component';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -12,7 +13,7 @@ export class ServizioCarrelloService {
 
   listaProdottiAggiunti: string[] = [];
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.caricaCarrello(); 
   }
 
@@ -38,13 +39,30 @@ export class ServizioCarrelloService {
 
   // salvo in localStorage per evitare lo svuotamento del carrello dopo il refresh della pagina
   private salvaCarrello() {
-    localStorage.setItem('carrello', JSON.stringify(this.listaProdottiAggiunti)); 
+    // Verifica se siamo in un ambiente browser prima di usare localStorage
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('carrello', JSON.stringify(this.listaProdottiAggiunti)); 
+    }
   }
 
   // una volta salvato, lo carico
   private caricaCarrello() {
-    const salvato = localStorage.getItem('carrello');
-    this.listaProdottiAggiunti = salvato ? JSON.parse(salvato) : []; 
-    this.listaProdottiAggiuntiSubject.next(this.listaProdottiAggiunti);  // notifica i subscriber
+    // Inizializza con array vuoto come default
+    this.listaProdottiAggiunti = [];
+    
+    // Verifica se siamo in un ambiente browser prima di usare localStorage
+    if (isPlatformBrowser(this.platformId)) {
+      const salvato = localStorage.getItem('carrello');
+      if (salvato) {
+        try {
+          this.listaProdottiAggiunti = JSON.parse(salvato);
+        } catch (e) {
+          console.error('Errore nel parsing del carrello:', e);
+        }
+      }
+    }
+    
+    // Notifica i subscriber (sia in server che in client)
+    this.listaProdottiAggiuntiSubject.next(this.listaProdottiAggiunti);
   }
 }
