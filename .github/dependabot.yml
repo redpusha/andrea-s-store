@@ -4,7 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 10 # Alzalo un po' per sicurezza
+    open-pull-requests-limit: 20 # Alzalo un po' per sicurezza
     groups:
       angular-core: # Fondamentale per non rompere Angular
         patterns:
