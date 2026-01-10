@@ -1,0 +1,16 @@
+name: Force Dependabot Check
+on:
+  schedule:
+    # Gira ogni 5 minuti
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # Permette anche di avviarlo a mano con un tasto
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Dependabot
+        run: |
+          gh api -X POST /repos/${{ github.repository }}/dependabot/updates/remote_config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
