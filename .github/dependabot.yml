@@ -4,13 +4,22 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 5
+    # Alziamo il limite per permettere di processare il backlog iniziale
+    open-pull-requests-limit: 20 
     labels:
       - "dependencies"
       - "automerge"
     commit-message:
       prefix: "chore(deps)"
-    security-updates-only: false
+    
+    # --- RAGGRUPPAMENTO: La chiave per gestire 25+ alert ---
+    groups:
+      dependencies:
+        patterns:
+          - "*" # Raggruppa tutti gli update npm in un'unica PR
+        exclude-patterns:
+          - "react" # (Opzionale) Escludi pacchetti critici se vuoi gestirli a parte
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -18,3 +27,7 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - "dependencies"
+    groups:
+      actions:
+        patterns:
+          - "*" # Raggruppa tutti gli update delle Actions
