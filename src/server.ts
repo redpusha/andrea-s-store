@@ -40,7 +40,7 @@ app.use(
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use('/**', (req, res, next) => {
+app.use((req, res, next) => {
   angularApp
     .handle(req)
     .then((response) =>
@@ -64,23 +64,3 @@ if (isMainModule(import.meta.url)) {
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
 export const reqHandler = createNodeRequestHandler(app);
-
-export const getPrerenderParams = () => {
-  const prodotti = {
-    telefoni: ['iphone 16', 'galaxy s24'],
-    televisori: ['lg', 'philips'],
-    pc: ['hp', 'mac'],
-  } as const;
-
-  const routes: { route: string }[] = [];
-
-  for (const categoria of Object.keys(prodotti) as (keyof typeof prodotti)[]) {
-    routes.push({ route: `/prodotti/${categoria}` });
-
-    for (const nome of prodotti[categoria]) {
-      routes.push({ route: `/prodotti/${categoria}/${nome}` });
-    }
-  }
-
-  return routes;
-};

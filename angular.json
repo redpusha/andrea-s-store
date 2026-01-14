@@ -29,6 +29,7 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
+            "prerender": false,
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
@@ -91,27 +92,6 @@
               "src/styles.css"
             ],
             "scripts": []
-          }
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "browserTarget": "esercizio-prodotti:build:production",
-            "serverTarget": "esercizio-prodotti:server:production",
-            "routes": [
-              "/",
-              "/home",
-              "/prodotti/telefoni",
-              "/prodotti/telefoni/iphone-16",
-              "/prodotti/telefoni/galaxy-s23",
-              "/prodotti/televisori",
-              "/prodotti/televisori/lg-oled",
-              "/prodotti/televisori/samsung-qled",
-              "/prodotti/pc",
-              "/prodotti/pc/macbook-pro",
-              "/prodotti/pc/dell-xps",
-              "/carrello"
-            ]
           }
         }
       }
